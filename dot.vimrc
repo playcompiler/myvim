@@ -42,7 +42,8 @@ set ignorecase
 " 关闭兼容模式
 set nocompatible
 " 设置backspace
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
+set backspace=2
 " vim 自身命令行模式智能补全
 set wildmenu
 
@@ -99,10 +100,10 @@ nmap <Leader>ch :FSHere<CR>
 nmap <Leader>tn :tnext<CR>
 
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
-let g:UltiSnipsSnippetDirectories=["mysnips"]
-let g:UltiSnipsExpandTrigger="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+"let g:UltiSnipsSnippetDirectories=["mysnips"]
+"let g:UltiSnipsExpandTrigger="<leader><tab>"
+"let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
 
 
 """"""""""""Using ycm instead""""""""""""""""""""""""""
@@ -111,9 +112,11 @@ nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 " YCM 补全菜单配色
 " 菜单
-highlight Pmenu ctermfg=white 
+highlight Pmenu term=standout ctermfg=2 ctermbg=255 
 " 选中项
-highlight PmenuSel ctermfg=red ctermbg=3
+highlight PmenuSel term=bold ctermfg=22 ctermbg=194 guifg=#003300 guibg=#DDFFDD
+" 关键字
+highlight Statement cterm=bold ctermfg=90 gui=bold guifg=#445588 
 " 补全功能在注释中同样有效
 let g:ycm_complete_in_comments=1
 " change the default configure file path
@@ -257,6 +260,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'derekwyatt/vim-fswitch'
+Plugin 'jiangmiao/auto-pairs'
 
 "tagbar using ctags internally.
 Plugin 'majutsushi/tagbar'
@@ -274,7 +278,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
-Plugin 'fholgado/minibufexpl.vim'
+Plugin 'thasmin/minibufexpl.vim'
 Plugin 'suan/vim-instant-markdown'
 
 "Plugin 'vim-scripts/DrawIt'
