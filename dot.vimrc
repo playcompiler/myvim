@@ -8,7 +8,8 @@ let mapleader=";"
 " 根据侦测到的不同类型加载对应的插件
 filetype indent plugin on
 " 颜色方案
-colorscheme github
+"colorscheme github
+colorscheme hybrid_material
 
 " 关掉visualbell
 set vb t_vb=
@@ -109,32 +110,24 @@ endif
 " 6 -> solid vertical bar  不闪烁的竖线
 
 " 菜单
-highlight pmenu term=standout ctermfg=2 ctermbg=255 
+"highlight pmenu term=standout ctermfg=2 ctermbg=255 
 " 选中项
 highlight pmenusel term=bold ctermfg=22 ctermbg=194 guifg=#003300 guibg=#ddffdd
+" 查找项
+highlight Search ctermfg=16 ctermbg=250 guifg=#000000 guibg=#bcbcbc
 " 关键字
-highlight Statement cterm=bold ctermfg=90 gui=bold guifg=#445588 
+"highlight Statement cterm=bold ctermfg=90 gui=bold guifg=#445588 
 
 " 先输入ctrl+v，再输入alt+key，出现^[key，即设置<M+key>
 " 弹出的补全列表，使用{C-n}来选择
 inoremap w <C-x><C-o>
 
-" 补全内容不以分割子窗口形式出现，只显示补全列表
-set completeopt-=preview
 
 """"""""""""OminiCppComplete configuration"""""""""""""
 set tags+=/usr/include/sys.tags
 nnoremap <F12> :!ctags -R --c++-kinds=+p+x+c+d+e+f+g+m+n+s+t+u+v --fields=+liaS --extra=+q --language-force=c++<CR>
-augroup omnigroup
-    autocmd!
-    autocmd FileType potion set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType cpp set omnifunc=ccomplete#Complete
-    autocmd FileType c set omnifunc=ccomplete#Complete
-augroup END
+au FileType c set omnifunc=omni#cpp#complete#Main
+
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
@@ -143,9 +136,11 @@ let OmniCpp_MayCompleteDot = 1   " 输入 .  后自动补全
 let OmniCpp_MayCompleteArrow = 1 " 输入 -> 后自动补全
 let OmniCpp_MayCompleteScope = 1 " 输入 :: 后自动补全
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+
 "自动关闭补全窗口
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest
+set completeopt=menuone,menu,noinsert
+set pumheight=15
 
 """"""""""""NertTree configuration"""""""""""""
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
@@ -220,7 +215,6 @@ map <leader>ss :mksession!.my.vim<cr> :wviminfo! .my.viminfo<cr>
 " 恢复快捷键
 map <leader>rs :source .my.vim<cr> :rviminfo .my.viminfo<cr>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vundle 环境设置
 filetype off
@@ -237,6 +231,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 
 "generate tags files for goto definitions.
+Plugin 'vim-scripts/OmniCppComplete'
 Plugin 'vim-scripts/indexer.tar.gz'
 Plugin 'vim-scripts/DfrankUtil'
 Plugin 'vim-scripts/vimprj'
@@ -246,12 +241,15 @@ Plugin 'dyng/ctrlsf.vim'
 Plugin 'terryma/vim-multiple-cursors'
 
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'SirVer/ultisnips'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'suan/vim-instant-markdown'
 Plugin 'test/potion'
 
+"Plugin 'tenfyzhong/CompleteParameter.vim'
+"Plugin 'othree/vim-autocomplpop'
+"Plugin 'clones/vim-l9'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'suan/vim-instant-markdown'
 "Plugin 'thasmin/minibufexpl.vim'
 "Plugin 'Valloric/YouCompleteMe'
 "Plugin 'vim-scripts/DrawIt'
