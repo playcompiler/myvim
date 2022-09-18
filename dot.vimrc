@@ -122,6 +122,15 @@ highlight Search ctermfg=16 ctermbg=250 guifg=#000000 guibg=#bcbcbc
 " 弹出的补全列表，使用{C-n}来选择
 inoremap w <C-x><C-o>
 
+" 如果项目目录中有cscope的索引文件
+if filereadable("cscope.out")
+    cs add cscope.out
+endif
+
+" 如果项目目录中有私有的配置文件
+if filereadable("vim.local")
+    source vim.local
+endif
 
 """"""""""""OminiCppComplete configuration"""""""""""""
 set tags+=/usr/include/sys.tags
@@ -155,6 +164,8 @@ let NERDTreeShowHidden=0
 let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
+" 不要显示目标文件
+let NERDTreeIgnore=['\.o$']
 
 """"""""""""Tagbar configuration"""""""""""""
 " you can press 's' to change the sorting
@@ -243,8 +254,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jlanzarotta/bufexplorer'
-Plugin 'test/potion'
+"Plugin 'test/potion'
 
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 "Plugin 'tenfyzhong/CompleteParameter.vim'
 "Plugin 'othree/vim-autocomplpop'
 "Plugin 'clones/vim-l9'
