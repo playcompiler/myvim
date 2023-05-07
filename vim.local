@@ -1,4 +1,5 @@
-" vim.local for linux
+" .vim.local for linux
 "
-set tags=/root/linux/build/tags
-cs add ./build/cscope.out
+" set tags=/home/neo/repos/linux-imx-lf-6.1.1-1.0.0/build/tags
+
+silent cs add ./build/cscope.out
